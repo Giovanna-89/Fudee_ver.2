@@ -1,0 +1,100 @@
+﻿@model Fudee_v2.Models.Restaurant
+
+@{
+    ViewData["Title"] = "Edycja";
+}
+
+<h1 class="oswald text-primary">Edycja</h1>
+
+@{
+    if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">@ViewBag.ErrorMessage</div>
+    }
+}
+
+<h4 class="text-success">Restauracja</>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdRestaurant" />
+            <div class="form-group">
+                <label asp-for="NameRestaurant" class="control-label"></label>
+                <input asp-for="NameRestaurant" class="form-control" />
+                <span asp-validation-for="NameRestaurant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdAddress" class="control-label"></label>
+                <select asp-for="IdAddress" class="form-control" asp-items="ViewBag.IdAddress"></select>
+                <span asp-validation-for="IdAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logo" class="control-label"></label>
+                <input asp-for="Logo" class="form-control" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionRestaurant" class="control-label"></label>
+                <img src="@Url.Content(Model.Logo != null ? "~/logo/" + Model.Logo : "~/logo/brak.jpg")" width="150" />
+                <input type="file" name="picture" id="picture" class="form-control" accept=".jpg,.gif,.png" />
+                <span asp-validation-for="DescriptionRestaurant" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasDelivery" /> @Html.DisplayNameFor(model => model.HasDelivery)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasCatering" /> @Html.DisplayNameFor(model => model.HasCatering)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Events" /> @Html.DisplayNameFor(model => model.Events)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SocialMedia" class="control-label"></label>
+                <input asp-for="SocialMedia" class="form-control" />
+                <span asp-validation-for="SocialMedia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddedDate" class="control-label"></label>
+                <input asp-for="AddedDate" class="form-control" />
+                <span asp-validation-for="AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCategory" class="control-label"></label>
+                <select asp-for="IdCategory" class="form-control" asp-items="ViewBag.IdCategory"></select>
+                <span asp-validation-for="IdCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class="form-control" asp-items="ViewBag.Id"></select>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz zmiany" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.IdRestaurant" class="btn btn-light">Powrót do restauracji</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script src="~/lib/ckeditor5/ckeditor.min.js"></script>
+            <script src="~/lib/ckeditor5/translations/pl.min.js"></script>
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    language: 'pl'
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+}

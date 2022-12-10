@@ -1,0 +1,93 @@
+﻿@using System.Security.Claims;
+@model Fudee_v2.Models.ViewModels.RestaurantWithOpinions
+
+@{
+    ViewData["Title"] = @Model.SelectedRestaurant.NameRestaurant;
+}
+
+
+<article>
+       <h1 class="oswald text-primary text-center">@Model.SelectedRestaurant.NameRestaurant</h1>
+        <div class="row">
+            <section class="col-lg-3 mt-3">
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                        <h6><i class="bi bi-person-circle me-1"></i><span class="text-success fw-bold">@Model.SelectedRestaurant.User.FullName</span></h6>
+                        <h6><i class="bi bi-calendar-event me-1"></i>@Model.SelectedRestaurant.AddedDate.ToString("dd MMMM yyyy")</h6>
+                        <h6><i class="bi bi-folder2-open me-1"></i>@Model.@Model.SelectedRestaurant.Category.NameCategory</h6>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <h6><i class="bi bi-chat-square-text me-1"></i>@Model.CommentsNumber @Model.Description</h6>
+                        <h6>
+                            <i class="bi bi bi-trophy me-1"></i><star-rating rating-avg=@Model.AverageScore rating-count=@Model.OpinionsNumber></star-rating>
+                            @if (@Model.OpinionsNumber > 0)
+                            {
+                                <small class="text-secondary">(@Model.AverageScore z @Model.OpinionsNumber)</small>
+                            }
+                        </h6>
+                    </div>
+                </div>
+            </section>
+            <section class="col-lg-9">
+                @{
+                    if (!String.IsNullOrEmpty(Model.SelectedRestaurant.Logo))
+                    {
+                        <img class="img-fluid mt-3" src="~/img/@Model.SelectedRestaurant.Logo">
+                    }
+                    else
+                    {
+                        <hr />
+                    }
+                }
+                <hr />
+                @Html.Raw(Model.SelectedRestaurant.DescriptionRestaurant)
+                <hr />
+            </section>
+          </div>
+</article>
+<div class="col-lg-9 offset-lg-3">
+    <section class="mb-3">
+        <a asp-action="Index" class="btn btn-primary">Lista restauracji</a>
+            @if (User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.SelectedRestaurant.Id)
+        {
+                <a asp-action="Edit" asp-route-id="@Model?.SelectedRestaurant.IdRestaurant" class="btn btn-warning">Edycja restauracji</a>
+        }
+    </section>
+    <section id="comments">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="alert alert-info mt-3" role="alert">
+                Musisz być zalogowany(-na), aby móc przeglądać i dodawać opinie.
+            </div>
+        }
+            else if (Model.SelectedRestaurant.Opinions == null || !Model.SelectedRestaurant.Opinions.Any())
+        {
+            <div class="alert alert-success mt-3" role="alert">
+                Dodaj pierwszy komentarz do tej restauracji.
+            </div>
+        }
+        else
+        {
+                foreach (var item in Model.SelectedRestaurant.Opinions.OrderByDescending(c => c.IdOpinion))
+            {
+                <div class="d-flex shadow-sm px-3 py-1 mb-3 bg-body rounded">
+                    <div class="flex-shrink-0">
+                        <img src="~/photo/mini/@((item.User.Photo != null) ? @item.User.Photo : "user.png")" width="64" alt="Fotografia autora" class="rounded-circle">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h6>
+                            <span class="fw-bold text-success">@item.User.FullName </span>
+                            <small class="text-secondary me-5"> dodano: @item.AddedDate.ToString("dd.MM.yyyy") </small>
+                            @if (item.Rating == null)
+                            {
+                                item.Rating = 0;
+                            }
+                            <star-rating rating-avg=(double)@item.Rating rating-count=1></star-rating>
+                        </h6>
+                        <p class="smaller">@item.Comment</p>
+                    </div>
+                </div>
+            }
+        }
+    </section>
+</div>

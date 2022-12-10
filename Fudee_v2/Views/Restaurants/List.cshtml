@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Fudee_v2.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Lista restauracji";
+}
+
+<h1 class="oswald text-primary">Restauracje</h1>
+
+<table class="table" id="restauracje">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameRestaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionRestaurant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasDelivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasCatering)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocialMedia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameRestaurant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionRestaurant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasDelivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasCatering)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialMedia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.DescriptionCategoryy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdRestaurant">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdRestaurant">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdRestaurant">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.13.1/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#teksty').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "Brak danych do wyświetlenia",
+                    "info": " Pozycje od _START_ do _END_ z _TOTAL_ rekordów",
+                    "infoEmpty": "Pozycji 0 z 0 dostępnych",
+                    "infoFiltered": "(filtrowanie z _MAX_ dostępnych pozycji)",
+                    "infoPostFix": "",
+                    "thousands": " ",
+                    "lengthMenu": "Pokaż _MENU_ pozycji",
+                    "loadingRecords": "Ładowanie...",
+                    "processing": "Przetwarzanie...",
+                    "search": "Wyszukaj:",
+                    "zeroRecords": "Nie znaleziono danych",
+                    "paginate": {
+                        "first": "Pierwsza",
+                        "last": "Ostatnia",
+                        "next": "Następna",
+                        "previous": "Poprzednia"
+                    },
+                    "aria": {
+                        "sortAscending": ": sortuje kolumnę rosnąco",
+                        "sortDescending": ": sortuje kolumnę malejąco"
+                    }
+                }
+            });
+        });
+    </script>
+}

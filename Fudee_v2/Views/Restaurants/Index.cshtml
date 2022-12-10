@@ -1,0 +1,101 @@
+﻿@model RestaurantsViewModel
+@{
+    ViewData["Title"] = "Lista restauracji";
+}
+
+<div class="container">
+	<div class="row">
+		<!-- Wyszukiwarka -->
+		<div class="d-none d-md-block col-md-12 col-xl-3">
+			<div class="card mb-3 shadow-sm">
+				<div class="card-body">
+					@using (Html.BeginForm("Index", "Restaurants", new { PageNumber = "1" }, FormMethod.Get))
+					{
+						<div class="row gt-3">
+							<div class="form-group col-auto">
+								<label for="Kategoria">Kategoria:</label>
+								@*@Html.DropDownList("Kategoria", ViewBag.Category, "---wszystkie---", htmlAttributes: new{@class = "form-control"}) @*- nie działa prawidłowo*@
+							</div>
+							<div class="form-group col-auto">
+								<label for="Autor">Restaurator:</label>
+								@Html.DropDownList("Restaurator", ViewBag.Restaurator, "---wszyscy---", htmlAttributes: new{@class = "form-control"})
+							</div>
+							<div class="form-group col-auto">
+								<label for="Fraza">Fraza:</label>
+								<input type="text" class="form-control" id="Fraza" name="Fraza" placeholder="Szukany ciąg" value="@Model.">
+							</div>
+							<button type="submit" class="btn btn-primary mt-3 col-auto">Filtruj</button>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+
+		<!-- Lista tekstów -->
+		<div class="col-xl-9">
+			@if (Model.RestaurantsView.RestaurantCount > 0)
+			{
+				@foreach (var item in Model.Restaurants)
+				{
+					<div class="card">
+						<div class="card-header">
+							<h4 class="oswald text-primary">@item.NameRestaurant</h4>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<img class="img-fluid" src="@Url.Content(item.Logo == null ? "~/graphic/"+item.IdCategory+".png" : "~/logo/"+item.Logo)" alt="@item.Category.NameCategory" />
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title text-success">@item.Address</h5>
+									<p class="card-text text-success">@item.SocialMedia</p>
+									<p class="card-text"><small class="text-muted">Data otwarcia: @item.AddedDate</small></p>
+									<div class="position-relative">
+										<a href="@Url.Action("Details", "Restaurants", new {id = item.IdRestaurant})" class="btn btn-outline-primary position-absolute bottom-0 end-0">Sprawdź</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="alert alert-info d-flex align-items-center mt-2" role="alert">
+					<i class="bi bi-info-circle-fill me-3"></i>
+					Brak restauracji do wyświetlenia. Zmień parametry filtrowania lub szukany ciąg.
+				</div>
+			}
+		</div>
+
+	</div>
+
+	<!-- Stronicowanie -->
+	<div class="row mt-3">
+		<nav aria-label="Nawigacja pomiędzy kolejnymi stronami">
+			<ul class="pagination">
+				@{
+					if (Model.RestaurantsView.PageNumber > 1)
+					{
+						<li class="page-item">
+							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = Model.RestaurantsView.PageNumber - 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Poprzednia</a>
+						</li>
+					}
+					for (var i = 1; i <= Model.RestaurantsView.PageCount; i++)
+					{
+						<li class="@(i == Model.RestaurantsView.PageNumber ? "page-item active" : "page-active")">
+							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = i, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">@i</a>
+						</li>
+					}
+					if (Model.RestaurantsView.PageNumber < Model.RestaurantsView.PageCount)
+					{
+						<li class="page-item">
+							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = Model.RestaurantsView.PageNumber + 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Następna</a>
+						</li>
+					}
+				}
+			</ul>
+		</nav>
+	</div>
+
+</div>

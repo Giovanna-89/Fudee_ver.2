@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Fudee_v2.Models.Category>
+
+@{
+    ViewData["Title"] = "Rodzaje kuchni";
+}
+
+<h1>Rodzaje kuchni</h1>
+
+<p>
+    <a asp-action="Create">Nowa kuchnia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionCategoryy)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                    <i class="bi-@item.Icon"></i><br />
+                    <img src="@Url.Content("~/graphic/"+item.Icon)" class="img-fluid" alt="@item.NameCategory" width="150" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionCategoryy)
+                </td>
+
+                <td>
+                    
+                    <a asp-action="Details" asp-route-id="@item.IdCategory">Szczegóły</a> 
+                    @{
+                        if(User.IsInRole("admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdCategory">Edytuj</a> 
+                            <a asp-action="Delete" asp-route-id="@item.IdCategory">Usunięcie</a>
+                        }
+                    }
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

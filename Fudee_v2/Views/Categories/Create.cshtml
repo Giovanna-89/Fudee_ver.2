@@ -1,0 +1,50 @@
+﻿@model Fudee_v2.Models.Category
+
+@{
+    ViewData["Title"] = "Dodaj";
+}
+
+<h1 class="text-primary popins">Nowa</h1>
+@{
+    if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert alert-danger" role="alert">@ViewBag.ErrorMessage</div>
+    }
+}
+<h4 class="text-success"><b>Kategoria</b></h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 interspace">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameCategory" class="control-label"></label>
+                <input asp-for="NameCategory" class="form-control" />
+                <span asp-validation-for="NameCategory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionCategoryy" class="control-label"></label>
+                <textarea asp-for="DescriptionCategoryy" class="form-control"></textarea>
+                <span asp-validation-for="DescriptionCategoryy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icon" class="control-label"></label>
+                <input asp-for="Icon" class="form-control" />
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-light">Powrót do listy</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+}
