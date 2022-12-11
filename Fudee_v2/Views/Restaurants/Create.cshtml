@@ -44,24 +44,24 @@
                 <input type="file" name="picture" id="picture" class="form-control" accept=".jpg,.gif,.png"/>
                 <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasDelivery" /> 
-                </label>
+            <div class="form-group">
+               <label asp-for="HasDelivery" class="control-label"></label>
+               <input class="form-check-input" asp-for="HasDelivery" />
+                <span asp-validation-for="HasDelivery" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
+            <div class="form-group">
+                <label asp-for="HasCatering" class="control-label"></label>
                     <input class="form-check-input" asp-for="HasCatering" />
-                </label>
+                <span asp-validation-for="HasCatering" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
+            <div class="form-group ">
+                <label asp-for="Events" class="control-label"></label>
                     <input class="form-check-input" asp-for="Events" />
-                </label>
+                <span asp-validation-for="Events" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCategory" class="control-label"></label>
-                <select asp-for="IdCategory" class ="form-control" asp-items="ViewBag.CategoryId">
+                <select asp-for="IdCategory" class ="form-control" asp-items="ViewBag.CategoryId">  @*błąd*@
                     <option value="">--- Wybierz kategorię ---</option>
                 </select>
             </div>
