@@ -78,19 +78,19 @@
 					if (Model.RestaurantsView.PageNumber > 1)
 					{
 						<li class="page-item">
-							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = Model.RestaurantsView.PageNumber - 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Poprzednia</a>
+							<a class="page-link" href="@Url.Action("Index", "Restaurants", new{PageNumber = Model.RestaurantsView.PageNumber - 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Poprzednia</a>
 						</li>
 					}
 					for (var i = 1; i <= Model.RestaurantsView.PageCount; i++)
 					{
 						<li class="@(i == Model.RestaurantsView.PageNumber ? "page-item active" : "page-active")">
-							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = i, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">@i</a>
+							<a class="page-link" href="@Url.Action("Index", "Restaurants", new{PageNumber = i, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">@i</a>
 						</li>
 					}
 					if (Model.RestaurantsView.PageNumber < Model.RestaurantsView.PageCount)
 					{
 						<li class="page-item">
-							<a class="page-link" href="@Url.Action("Index", "Texts", new{PageNumber = Model.RestaurantsView.PageNumber + 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Następna</a>
+							<a class="page-link" href="@Url.Action("Index", "Restaurants", new{PageNumber = Model.RestaurantsView.PageNumber + 1, Kategoria = Model.RestaurantsView.Category, Restaurator = Model.RestaurantsView.Restaurator, Fraza = Model.RestaurantsView.Phrase})">Następna</a>
 						</li>
 					}
 				}
