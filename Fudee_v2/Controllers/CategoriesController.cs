@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fudee_v2.Controllers
 {
-    [Authorize(Roles = "admin, restaurator")]
+   
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
