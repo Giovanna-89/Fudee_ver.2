@@ -24,10 +24,40 @@
                 <input asp-for="NameRestaurant" class="form-control" />
                 <span asp-validation-for="NameRestaurant" class="text-danger"></span>
             </div>
-            <div class="form-group"> @*do poprawy*@
-                <label asp-for="IdAddress" class="control-label"></label>
-                <textarea asp-for="IdAddress" class="form-control"></textarea>
-                <span asp-validation-for="IdAddress" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Address.StreetName" class="control-label"></label>
+                <input asp-for="Address.StreetName" class="form-control" />
+                <span asp-validation-for="Address.StreetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.StreetNr" class="control-label"></label>
+                <input asp-for="Address.StreetNr" class="form-control" />
+                <span asp-validation-for="Address.StreetNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.LocalNr" class="control-label"></label>
+                <input asp-for="Address.LocalNr" class="form-control" />
+                <span asp-validation-for="Address.LocalNr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.PostCode" class="control-label"></label>
+                <input asp-for="Address.PostCode" class="form-control" />
+                <span asp-validation-for="Address.PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.City" class="control-label"></label>
+                <input asp-for="Address.City" class="form-control" />
+                <span asp-validation-for="Address.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.ContactPhone" class="control-label"></label>
+                <input asp-for="Address.ContactPhone" class="form-control" />
+                <span asp-validation-for="Address.ContactPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.ContactEmail" class="control-label"></label>
+                <input asp-for="Address.ContactEmail" class="form-control" />
+                <span asp-validation-for="Address.ContactEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DescriptionRestaurant" class="control-label"></label>
@@ -36,12 +66,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="SocialMedia" class="control-label"></label>
-                <textarea id="editor" asp-for="SocialMedia" class="form-control"></textarea>
+                <input id="editor" asp-for="SocialMedia" class="form-control" />
                 <span asp-validation-for="SocialMedia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Logo" class="control-label"></label>
-                <input type="file" name="picture" id="picture" class="form-control" accept=".jpg,.gif,.png"/>
+                <input type="file" name="picture" id="picture" class="form-control" accept=".jpg,.gif,.png" />
                 <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
             <div class="form-group">

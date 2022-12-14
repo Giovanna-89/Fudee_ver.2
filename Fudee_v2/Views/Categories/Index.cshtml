@@ -43,14 +43,19 @@
                 </td>
 
                 <td>
-                    
-                    <a asp-action="Details" asp-route-id="@item.IdCategory">Szczegóły</a> 
+                         <a asp-area="" asp-controller="Dishes" asp-action="Index">Dania</a>
                     @{
+                    if(User.IsInRole("admin")||User.IsInRole("restaurator"))
+                    {
+                    <a asp-action="Details" asp-route-id="@item.IdCategory">Szczegóły</a> 
+                     
                         if(User.IsInRole("admin"))
                         {
                             <a asp-action="Edit" asp-route-id="@item.IdCategory">Edytuj</a> 
                             <a asp-action="Delete" asp-route-id="@item.IdCategory">Usunięcie</a>
                         }
+                       
+                    }
                     }
                     
                 </td>

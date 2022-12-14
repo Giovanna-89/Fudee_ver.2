@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Fudee_v2.Models.Dish>
+
+@{
+    ViewData["Title"] = "Dania";
+}
+
+<h1>Dania</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageDish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameDishes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionDishes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageDish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameDishes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionDishes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.DescriptionRestaurant)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdDishes">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdDishes">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdDishes">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -355,3 +355,4 @@ C:\Users\jaros\source\repos\Fudee_v2.0.0\Fudee_v2\Fudee_v2\bin\Debug\net6.0\runt
 C:\Users\jaros\source\repos\Fudee_v2.0.0\Fudee_v2\Fudee_v2\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\jaros\source\repos\Fudee_v2.0.0\Fudee_v2\Fudee_v2\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\jaros\source\repos\Fudee_v2.0.0\Fudee_v2\Fudee_v2\bin\Debug\net6.0\LazZiya.ImageResize.dll
+C:\Users\jaros\source\repos\Fudee_v2.0.0\Fudee_v2\Fudee_v2\bin\Debug\net6.0\System.Reflection.MetadataLoadContext.dll
